@@ -134,3 +134,91 @@ select {
     color: #42515f;
     background-color: transparent;
 }
+
+.buttonParent {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.button {
+    font-size: 20px;
+    font-family: Roboto;
+    letter-spacing: 0px;
+    color: #42515f;
+    opacity: 1;
+    background: transparent;
+    border: 1px solid #969696;
+    border-radius: 5px;
+    font-weight: 400;
+    min-width: 140px;
+    padding: 7px 7px;
+    border: 1px solid #707070;
+    cursor: pointer;
+}
+
+.submitButton {
+    margin-right: 30px;
+}
+
+.cancelButton {
+    text-decoration: node;
+    text-align: center;
+}
+
+.resetButton {
+    margin-right: 10px;
+}
+
+@media only screen and (max-width:600px) {
+    .form {
+        margin-top: 10px;
+    }
+    .submit-reset {
+        width: 100%;
+        display: flex;
+        flex-grow: 1;
+        flex-direction: row-reverse;
+        justify-content: space-between
+    }
+    .cancelButton {
+        margin-left: 0px;
+    }
+    .form {
+        width: 85%;
+        padding: 44ox 20px;
+    }
+    .profile-lable {
+        margin-left: 0px;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    .cancelButton {
+        margin-left: 0px;
+    }
+    .form {
+        width: 85%;
+        padding: 44px 20px;
+    }
+}
+
+a.button:hover {
+    background: grey;
+    color: white;
+}
+
+.submitButton:hover {
+    background-color: #82A70C;
+    color: white;
+}
+
+.resetButton:hover {
+    background: grey;
+    color: white;
+}
+
+.department {
+    margin-left: 30px;
+}
