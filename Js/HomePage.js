@@ -1,12 +1,17 @@
+let empPayrollList;
 window.addEventListener('DOMContentLoaded', (event) => {
+    empPayrollList = getEmployeeDataFromStorage();
     createInnerHtml();
+    document.querySelector(".emp-count").textContent = empPayrollList.length;
 });
+const getEmployeeDataFromStorage = () => {
+    return localStorage.getItem("EmployeePayrollList") ?
+        JSON.parse(localStorage.getItem("EmployeePayrollList")) : [];
+}
 
 let createInnerHtml = () => {
     let headerHTML = "<tr> <th></th> <th>Name</th> <th>Gender</th> <th>Department</th> <th>Salary</th> <th>StartDate</th><th>Actions</th> </tr>"
     let innerHTML = `${headerHTML}`;
-    let empPayrollList = createEmployeePayrollJSON();
-
     for (const empPayrollData of empPayrollList) {
         innerHTML = `
         ${innerHTML}
@@ -23,7 +28,7 @@ let createInnerHtml = () => {
         ${getDeptHtml(empPayrollData._department)}
     </td>
     <td>${empPayrollData._salary}</td>
-    <td>${empPayrollData._startDate}</td>
+    <td>${stringifyDate(empPayrollData._startDate)}</td>
     <td>
         <img alt="delete" src="../assets/icons/delete-black-18dp.svg">
         <img alt="edit" src="../assets/icons/create-black-18dp.svg">
@@ -53,7 +58,7 @@ const createEmployeePayrollJSON = () => {
                 "Engineer",
                 "Other"
             ],
-            "_salary": "498700",
+            "_salary": "400000",
             "_startDate": "16 Oct 2021",
             "_note": "All In One",
             "_profilePic": "../assets/profile-images/Ellipse -1.png"
@@ -66,7 +71,7 @@ const createEmployeePayrollJSON = () => {
                 "Sales",
                 "Finance"
             ],
-            "_salary": "400000",
+            "_salary": "409800",
             "_startDate": "12 Oct 2019",
             "_note": "",
             "_profilePic": "../assets/profile-images/Ellipse -1.png",
