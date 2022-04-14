@@ -19,7 +19,7 @@ function validateName() {
     let name = document.querySelector('#name');
     let textError = document.querySelector('.text-error');
     name.addEventListener('input', function() {
-        let nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
+        let nameRegex = RegExp('^[A-Z]{1}[a-z A-Z\\s]{2,}$');
         if (nameRegex.test(name.value)) {
             textError.textContent = "";
         } else {
@@ -38,7 +38,7 @@ function validateDate() {
 }
 
 function checkDate() {
-    let dateError = document.querySelector('.dates-error');
+    let dateError = document.querySelector('.date-error');
     let date = day.value + " " + month.value + " " + year.value;
     try {
         checkStartDate(new Date(Date.parse(date)));
@@ -61,14 +61,15 @@ function checkStartDate(startDate) {
     }
 
 }
-function save(event) {
-    alert("save")
 
+function save(event) {
     event.preventDefault();
     event.stopPropagation();
 
     try {
-        let employeePayrollDate = createEmployeePayroll();
+        let employeePayrollData = createEmployeePayroll();
+        createAndUpdateStorage(employeePayrollData);
+        alert("Data Stored With name" + employeePayrollData.name);
     } catch (e) {
         return;
     }
@@ -78,9 +79,55 @@ function save(event) {
 function createEmployeePayroll() {
     let employeePayrollData = new EmployeePayrollData();
     try {
-        employeePayrollData.name = document.querySelector('#name').value;
+        employeePayrollData.name = getInputValueByID('#name');
+        employeePayrollData.salary = getInputValueByID('#salary');
+        employeePayrollData.notes = getInputValueByID('#notes');
+        employeePayrollData.profilePic = getSelectedValues('[name=profile]').pop();
+        employeePayrollData.gender = getSelectedValues('[name=gender]').pop();
+        employeePayrollData.department = getSelectedValues('[name=department]');
     } catch (e) {
-        let textError = document.querySelector('.text-error');
-        textError.textContent = e;
+        setTextValue('.text-error', e);
     }
+    try {
+        let date = getInputValueByID('#day') + " " + getInputValueByID('#month') + " " + getInputValueByID('#year')
+        employeePayrollData.startDate = new Date(Date.parse(date));
+    } catch (e) {
+        setTextValue('.date-error', e);
+    }
+
+
+    alert(employeePayrollData.toString());
+    return employeePayrollData;
+}
+
+function getInputValueByID(id) {
+    let value = document.querySelector(id).value;
+    return value;
+}
+
+function setTextValue(className, value) {
+    let textError = document.querySelector(className);
+    textError.textContent = value;
+}
+
+function getSelectedValues(propertyValue) {
+    let allItems = document.querySelectorAll(propertyValue);
+    let setItems = [];
+    allItems.forEach(item => {
+        if (item.checked) {
+            setItems.push(item.value);
+        }
+    });
+    return setItems;
+}
+
+function createAndUpdateStorage(employeePayrollData) {
+    let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
+    if (employeePayrollList == undefined) {
+        employeePayrollList = [employeePayrollData];
+    } else {
+        employeePayrollList.push(employeePayrollData);
+    }
+    localStorage.setItem("EmployeePayrollListList", JSON.stringify(employeePayrollList));
+
 }
