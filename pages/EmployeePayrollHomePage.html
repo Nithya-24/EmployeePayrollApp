@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/homePage.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;1,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/HomePage.css">
-    <script src="../js/HomePage.js"></script>
-    <script src="../js/utility.js"></script>
-    <title>Employee Payroll HomePage</title>
+    <title>Employee payroll form</title>
 </head>
-
 <body>
     <header class="header-content header">
         <div class="logo-content">
-            <img src="../assets/images/logo.png" alt="logo">
+            <img src="../assets/images/logo.png" alt="">
             <div>
                 <span class="emp-text">EMPLOYEE</span><br>
                 <span class="emp-text emp-payroll">PAYROLL</span>
@@ -24,50 +19,20 @@
         </div>
     </header>
     <div class="main-content">
-        <div class="header-content sub-main-content">
-            <div class="emp-details-text">
-                Employee Details
-                <div class="emp-count">10</div>
+        <div class="header-content">
+            <div class="emp-detail-text">
+                Employee Details <div class="emp-count">10</div>
             </div>
-            <div onclick="location.href='./EmployeePayroll.html'" class="add-button">
-                <div class="plus-icon">
-                    <img src="../assets/icons/add-24px.svg" alt="Add user logo">
-                </div>
-                <div>Add User</div>
-            </div>
+        <a href="../pages/EmployeePayroll.html" class="add-button">
+            <img src="../assets/icons/add-24px.svg" alt=""> Add User</a>
         </div>
         <div class="table-main">
-            <table id="display" class="table">
-                <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Gender</th>
-                    <th>Department</th>
-                    <th>Salary</th>
-                    <th>StartDate</th>
-                    <th>Actions</th>
-                </tr>
-                <td>
-                    <img class="profile" src="../assets/profile-images/Ellipse -1.png">
-
-                </td>
-                <td>
-                    Nithya R
-                </td>
-                <td>Female</td>
-                <td>
-                    <div class="dept-label">Engineer</div>
-                    <div class="dept-label">Others</div>
-                </td>
-                <td>400000</td>
-                <td>16 Oct 2021</td>
-                <td>
-                    <img alt="delete" src="../assets/icons/delete-black-18dp.svg">
-                    <img alt="edit" src="../assets/icons/create-black-18dp.svg">
-                </td>
+            <table id="table-display" class="table">
             </table>
         </div>
     </div>
+    <script defer src="../Js/HomePage.js"></script>
+    <script defer src="../Js/EmployeePayrollData.js"></script>
+    <script defer src="../Js/Utility.js"></script>
 </body>
-
 </html>
