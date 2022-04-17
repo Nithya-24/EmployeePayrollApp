@@ -1,3 +1,6 @@
+let isUpdate = false;
+let employeePayrollObj = {};
+
 window.addEventListener('DOMContentLoaded', (event) =>{
     const name = document.querySelector('#name');
     const textError = document.querySelector('.text-error');
@@ -20,6 +23,7 @@ window.addEventListener('DOMContentLoaded', (event) =>{
         salary.addEventListener('input',function(){
             output.textContent = salary.value;
         });
+        checkForUpdate();
  });
  
  const save = () => {
@@ -82,6 +86,18 @@ window.addEventListener('DOMContentLoaded', (event) =>{
     return value;
  }
  
+ const setForm = () => {
+    setValue('#name', employeePayrollObj._name);
+    setSelectedValues('[name=profile]', employeePayrollObj._profilePic);
+    setSelectedValues('[name=gender]', employeePayrollObj._gender);
+    setSelectedValues('[name=department]', employeePayrollObj._department);
+    setValue('#salary', employeePayrollObj._salary);
+    setTextValue('.salary-output', employeePayrollObj._salary);
+    setValue('#notes', employeePayrollObj._note);
+    
+    setValue('#startDates', employeePayrollObj._startDate);
+}
+
  const resetForm = () => {
     setValue('#name','');
     unsetSelectedValues('[name=profile]');
@@ -110,3 +126,30 @@ window.addEventListener('DOMContentLoaded', (event) =>{
     const element = document.querySelector(id);
     element.value = value;
  }
+ const setSelectedValues = (propertyValue, value) => {
+    let allItems = document.querySelectorAll(propertyValue);
+    allItems.forEach(item => {
+        if(Array.isArray(value)){
+            if(value.includes(item.value)){
+                item.checked = true;
+            }
+        }
+        else if (item.value === value)
+            item.checked = true;
+    });
+}
+
+const checkForUpdate = () => {
+    const employeePayrollJson = localStorage.getItem('editEmp');
+    isUpdate = employeePayrollJson ? true : false;
+    if (!isUpdate) return;
+    employeePayrollObj = JSON.parse(employeePayrollJson);
+    setForm();
+}
+
+function unsetSelectedValues(propertyValue) {
+    let allItems = document.querySelectorAll(propertyValue);
+    allItems.forEach(item => {
+        item.selected = false;
+    });
+}

@@ -5,6 +5,11 @@ const stringifyDate = (date) => {
     return newDate;
 }
 
+let site_properties = {
+    home_page: "../pages/EmployeePayrollHomePage.html",
+    add_emp_payroll_page: "../pages/EmployeePayroll.html"
+};
+
 const update = (node) => {
     let empPayrollData = empPayrollList.find(empData => empData._id == node.id)
     if(!empPayrollData) return;
